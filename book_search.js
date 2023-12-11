@@ -34,13 +34,12 @@
         "SearchTerm": searchTerm,
         "Results": resArr
     };
-    
     return result; 
 }
 
 function findInContent(book, content, searchTerm, resArr){
-    /** for each of a book's contents, update resArr with any findings of searchTerm
-     * resArr will push in new matches of searchTerm by tracking new ISBN, Page, Line */
+    /** For each of a book's contents, this function will update resArr with any findings of searchTerm.
+     *  The result array resArr will push in new matches of searchTerm by tracking new ISBN, Page, Line. */
     let sentence = content.Text;
     
     // if indexOf == -1, searchTerm not in the Text
@@ -115,8 +114,7 @@ const expected3result = {
  *  */
 const expected4result = {
     "SearchTerm": "wedding",
-    "Results": [
-    ]
+    "Results": []
 }
 
 /** Created new array for the test case of using multiple books (2+). */
