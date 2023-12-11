@@ -92,7 +92,8 @@ const twentyLeaguesOut = {
 }
 
 /** Expected result for test3result
- *  Test that matches two results for "and." in twentyLeaguesIn */
+ *  Test for correct matches for a search term in the books. 
+ *  */
 const expected3result = {
     "SearchTerm": "and",
     "Results": [
@@ -110,15 +111,15 @@ const expected3result = {
 }
 
 /** Expected result for test4result
- *  Test that matches two results for "and." in twentyLeaguesIn */
+ *  Test for NO matches for a search term not in the books. 
+ *  */
 const expected4result = {
     "SearchTerm": "wedding",
     "Results": [
     ]
 }
 
-/** Creating new array for multiple books (2+) */
-
+/** Created new array for the test case of using multiple books (2+). */
 const multipleBooks = [
     {
         "Title": "Twenty Thousand Leagues Under the Sea",
@@ -153,7 +154,7 @@ const multipleBooks = [
             {
                 "Page": 22,
                 "Line": 2,
-                "Text": "the testing a sample. The hare slowly jumped off"
+                "Text": "the testing a sample. ThE hare slowly jumped off"
             },
             {
                 "Page": 33,
@@ -161,12 +162,12 @@ const multipleBooks = [
                 "Text": "Walking in the breeze. Moon hits her face"
             } 
         ] 
-    },
+    }
 ]
 
 /** Expected result for test5result 
- *  Test that finds all the "her"
-*/
+ *  Test for correct matches for a search term in multiple books.
+ *  */
 const expected5result = {
     "SearchTerm": "her",
     "Results": [
@@ -189,16 +190,11 @@ const expected5result = {
 }
 
 /** Expected result for test6result 
- *  Test that checks case-sensitivity
-*/
+ *  Test for correct matches for a case-sensitive search term.
+ *  */
 const expected6result = {
-    "SearchTerm": "The",
+    "SearchTerm": "ThE",
     "Results": [
-        {
-            "ISBN": "9780000528531",
-            "Page": 31,
-            "Line": 8
-        },
         {
             "ISBN": "1234567890123",
             "Page": 22,
@@ -207,20 +203,18 @@ const expected6result = {
     ]
 }
 
-/** null book list */
+/** No books inputted: null book list */
 const nullList = []
 
 /** Expected result for test7result 
- *  Test for null book list
-*/
+ *  Test for null book list.
+ *  */
 const expected7result = {
-    "SearchTerm": "myself",
-    "Results": [
-
-    ]
+    "SearchTerm": "the",
+    "Results": []
 }
 
-/** null book content */
+/** No book content inputted (for second book): null book content */
 const multipleBooks2 = [
     {
         "Title": "Twenty Thousand Leagues Under the Sea",
@@ -251,11 +245,11 @@ const multipleBooks2 = [
 ]
 
 /** Expected result for test8result
- *  Test for null content in book
- */
+ *  Test for null content in book.
+ *  */
 
 const expected8result = {
-    "SearchTerm": "her",
+    "SearchTerm": "momentum",
     "Results": [
         {
             "ISBN": "9780000528531",
@@ -302,7 +296,8 @@ if (test2result.Results.length == 1) {
 }
 
 /** Positive test, test #3. 
- *  Test that returns correct matches for "and" */
+ *  Test that should produce correct results for a search term found in the input with one book. 
+ *  */
 const test3result = findSearchTermInBooks("and", twentyLeaguesIn);
 if (JSON.stringify(test3result) === JSON.stringify(expected3result)){
     console.log("PASS: Test 3");
@@ -313,7 +308,8 @@ if (JSON.stringify(test3result) === JSON.stringify(expected3result)){
 }
 
 /** Negative test, test #4
- *  Test that returns NO matches for "wedding" (doesn't exist in string) */
+ *  Test that should produce NO results for a search term not found in the input.  
+ *  */
 const test4result = findSearchTermInBooks("wedding", twentyLeaguesIn);
 if (JSON.stringify(test4result) === JSON.stringify(expected4result)){
     console.log("PASS: Test 4");
@@ -324,8 +320,8 @@ if (JSON.stringify(test4result) === JSON.stringify(expected4result)){
 }
 
 /** Positive test, test #5
- *  Test that returns matches for "her" in multiple (two or more) books correctly
- */
+ *  Test that should returns all matches for a search term found in the input of multiple (two or more) books.
+ *  */
 const test5result = findSearchTermInBooks("her", multipleBooks);
 if (JSON.stringify(test5result) === JSON.stringify(expected5result)){
     console.log("PASS: Test 5");
@@ -336,9 +332,9 @@ if (JSON.stringify(test5result) === JSON.stringify(expected5result)){
 }
 
 /** Case-sensitive test, test #6
- *  Test that will only return the uppercase/lowercase variation(s) in the searchTerm (i.e. "The" vs. "the")
- */
-const test6result = findSearchTermInBooks("The", multipleBooks);
+ *  Test that should only return the search terms spelled with the exact same capitalization.
+ *  */
+const test6result = findSearchTermInBooks("ThE", multipleBooks);
 if (JSON.stringify(test6result) === JSON.stringify(expected6result)){
     console.log("PASS: Test 6");
 } else {
@@ -348,9 +344,9 @@ if (JSON.stringify(test6result) === JSON.stringify(expected6result)){
 }
 
 /** Edge case test, test #7
- *  Test that will process empty list with empty Result list returned.
- */
-const test7result = findSearchTermInBooks("myself", nullList);
+ *  Test that should process an empty inputted list correctly, outputting result as an empty list.
+ *  */
+const test7result = findSearchTermInBooks("the", nullList);
 if (JSON.stringify(test7result) === JSON.stringify(expected7result)){
     console.log("PASS: Test 7");
 } else {
@@ -360,9 +356,9 @@ if (JSON.stringify(test7result) === JSON.stringify(expected7result)){
 }
 
 /** Edge case test, test #8
- *  Test that will process through books with empty book content.
- */
-const test8result = findSearchTermInBooks("her", multipleBooks2);
+ *  Test that should process books with empty book content correctly with no errors and matches.
+ *  */
+const test8result = findSearchTermInBooks("momentum", multipleBooks2);
 if (JSON.stringify(test8result) === JSON.stringify(expected8result)){
     console.log("PASS: Test 8");
 } else {
